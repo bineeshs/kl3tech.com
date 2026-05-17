@@ -9,32 +9,11 @@ import { Label } from '../ui/label';
 import { Package } from 'lucide-react';
 import { toast } from 'sonner';
 
-export function Login() {
+export function AdminLogin() {
   const navigate = useNavigate();
   const { login } = useApp();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleCustomerLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, isAdmin: false }),
-      });
-      const data = await response.json();
-      if (data.success) {
-        login(false, email);
-        toast.success('Logged in successfully!');
-        navigate('/');
-      } else {
-        toast.error('Invalid credentials');
-      }
-    } catch (error) {
-      toast.error('Login failed');
-    }
-  };
 
   const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,26 +45,26 @@ export function Login() {
               <Package className="w-8 h-8 text-white" />
             </div>
           </div>
-          <CardTitle className="text-2xl">Welcome to AudioHub</CardTitle>
-          <CardDescription>Sign in to your account</CardDescription>
+          <CardTitle className="text-2xl">Admin Access</CardTitle>
+          <CardDescription>Sign in to the admin dashboard</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleCustomerLogin} className="space-y-4">
+          <form onSubmit={handleAdminLogin} className="space-y-4">
             <div>
-              <Label htmlFor="customer-email">Email</Label>
+              <Label htmlFor="admin-email">Email</Label>
               <Input
-                id="customer-email"
+                id="admin-email"
                 type="email"
-                placeholder="customer@email.com"
+                placeholder="admin@audiohub.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div>
-              <Label htmlFor="customer-password">Password</Label>
+              <Label htmlFor="admin-password">Password</Label>
               <Input
-                id="customer-password"
+                id="admin-password"
                 type="password"
                 placeholder="••••••••"
                 value={password}
@@ -94,7 +73,7 @@ export function Login() {
               />
             </div>
             <Button type="submit" className="w-full">
-              Sign In as Customer
+              Sign In as Admin
             </Button>
           </form>
         </CardContent>

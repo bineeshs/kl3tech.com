@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, Order } from '../data/mockData';
+import { API_BASE_URL } from '../config/apiConfig';
 
 interface CartItem {
   product: Product;
@@ -62,7 +63,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/products');
+      const response = await fetch(`${API_BASE_URL}/api/products`);
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -72,7 +73,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/orders');
+      const response = await fetch(`${API_BASE_URL}/api/orders`);
       const data = await response.json();
       setOrders(data);
     } catch (error) {
@@ -109,7 +110,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const addProduct = async (product: Product) => {
     try {
-      const response = await fetch('http://localhost:3001/api/products', {
+      const response = await fetch(`${API_BASE_URL}/api/products`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(product),
@@ -123,7 +124,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const updateProduct = async (id: string, updatedProduct: Partial<Product>) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/products/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/products/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedProduct),
@@ -137,7 +138,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const deleteProduct = async (id: string) => {
     try {
-      await fetch(`http://localhost:3001/api/products/${id}`, {
+      await fetch(`${API_BASE_URL}/api/products/${id}`, {
         method: 'DELETE',
       });
       setProducts(products.filter(p => p.id !== id));
@@ -183,7 +184,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const addOrder = async (order: Order) => {
     try {
-      const response = await fetch('http://localhost:3001/api/orders', {
+      const response = await fetch(`${API_BASE_URL}/api/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(order),
@@ -197,7 +198,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const updateOrderStatus = async (orderId: string, status: Order['status']) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/orders/${orderId}/status`, {
+      const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status }),

@@ -132,6 +132,7 @@ export function AdminDashboard() {
                     <div className="flex items-center gap-3">
                       <img
                         src={product.image}
+                        loading='lazy'
                         alt={product.name}
                         className="w-12 h-12 rounded object-cover"
                       />

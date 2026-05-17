@@ -45,6 +45,7 @@ export function ProductDetail() {
           <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden bg-gray-100">
             <img
               src={product.image}
+              loading='lazy'
               alt={product.name}
               className="w-full h-full object-cover"
             />

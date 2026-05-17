@@ -15,7 +15,7 @@ export function CustomerLayout() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <Package className="w-8 h-8 text-blue-600" />
-            <span className="text-xl font-semibold">AudioHub</span>
+            <span className="text-xl font-semibold">KL3TECH</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
@@ -83,7 +83,7 @@ export function CustomerLayout() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Package className="w-6 h-6" />
-                <span className="text-lg font-semibold">AudioHub</span>
+                <span className="text-lg font-semibold">KL3TECH</span>
               </div>
               <p className="text-gray-400">Premium custom-built audio electronics for music enthusiasts.</p>
             </div>
@@ -96,7 +96,7 @@ export function CustomerLayout() {
             </div>
             <div>
               <h3 className="font-semibold mb-4">Contact</h3>
-              <p className="text-gray-400">Email: support@audiohub.com</p>
+              <p className="text-gray-400">Email: kl3tech@gmail.com</p>
               <p className="text-gray-400">Phone: (555) 123-4567</p>
             </div>
           </div>

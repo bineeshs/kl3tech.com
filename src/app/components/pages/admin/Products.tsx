@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { useApp } from '../../../context/AppContext';
 import { Button } from '../../ui/button';
 import { Card, CardContent } from '../../ui/card';
@@ -26,6 +26,7 @@ export function AdminProducts() {
     features: [],
     specifications: {},
   });
+  const [imagePreview, setImagePreview] = useState('');
 
   const resetForm = () => {
     setFormData({
@@ -39,12 +40,27 @@ export function AdminProducts() {
       specifications: {},
     });
     setEditingProduct(null);
+    setImagePreview('');
   };
 
   const handleEdit = (product: Product) => {
     setEditingProduct(product);
     setFormData(product);
+    setImagePreview(product.image || '');
     setIsDialogOpen(true);
+  };
+
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      setImagePreview(result);
+      setFormData((prev) => ({ ...prev, image: result }));
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleDelete = (id: string, name: string) => {
@@ -152,14 +168,21 @@ export function AdminProducts() {
                 />
               </div>
               <div>
-                <Label htmlFor="image">Image URL</Label>
-                <Input
+                <Label htmlFor="image">Product Image</Label>
+                <input
                   id="image"
-                  type="url"
-                  value={formData.image}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  placeholder="https://images.unsplash.com/..."
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="mt-2 block w-full text-sm text-slate-900 file:border-0 file:bg-slate-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-slate-700"
                 />
+                {imagePreview ? (
+                  <img
+                    src={imagePreview}
+                    alt="Product preview"
+                    className="mt-3 w-full max-h-48 rounded object-cover"
+                  />
+                ) : null}
               </div>
               <div className="flex gap-3">
                 <Button type="submit" className="flex-1">
@@ -201,6 +224,7 @@ export function AdminProducts() {
                   <TableCell>
                     <img
                       src={product.image}
+                      loading='lazy'
                       alt={product.name}
                       className="w-16 h-16 rounded object-cover"
                     />

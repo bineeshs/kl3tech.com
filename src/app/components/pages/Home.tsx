@@ -118,6 +118,7 @@ export function Home() {
                 <div className="relative h-64 overflow-hidden rounded-t-lg">
                   <img
                     src={product.image}
+                    loading='lazy'
                     alt={product.name}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />

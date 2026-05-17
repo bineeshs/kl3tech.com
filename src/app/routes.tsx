@@ -10,6 +10,7 @@ import { AdminDashboard } from "./components/pages/admin/Dashboard";
 import { AdminProducts } from "./components/pages/admin/Products";
 import { AdminOrders } from "./components/pages/admin/Orders";
 import { Login } from "./components/pages/Login";
+import { AdminLogin } from "./components/pages/AdminLogin";
 
 export const router = createBrowserRouter([
   {
@@ -35,5 +36,9 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     Component: Login,
+  },
+  {
+    path: "/admin-login",
+    Component: AdminLogin,
   },
 ]);
