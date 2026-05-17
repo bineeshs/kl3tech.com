@@ -3,9 +3,13 @@ import cors from 'cors';
 import { mockProducts, mockOrders } from './api/data.js';
 
 const app = express();
-const PORT = 3001;
+// const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:5173", "https://www.kl3tech.com"]
+}));
+
 app.use(express.json());
 
 // Products API
